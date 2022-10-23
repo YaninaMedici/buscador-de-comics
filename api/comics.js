@@ -1,4 +1,4 @@
-// const baseUrl = "https://gateway.marvel.com/v1/public";
+const baseUrl = "https://gateway.marvel.com/v1/public";
 const apikey = "ad0c07cf382bdeb7bad248929fa3e0d6";
 
 // const getComics = async () => {
