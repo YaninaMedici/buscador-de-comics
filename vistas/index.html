@@ -37,43 +37,40 @@
 
 
     <main>
-    <section class="d-flex bd-highlight m-3 section-buscador">
+        <section class="d-flex bd-highlight m-3 section-buscador">
 
-        <form id="search-comics" action="">
+            <form id="search-comics" action="">
 
-            <div class="text-busqueda fw-bold"> <i></i> BÚSQUEDA</div>
-            <input type="password" name="contrasenia" id="input-busqueda" required>
-            <label class="label-busqueda">
-                <span class="placeholder-busqueda text-secondary"> Ingresá tu búsqueda </span>
-            </label>
-    
-            <div class="p-2 bd-highlight">
-                <label for="option-tipo" class="form-label fw-bold text-secondary">TIPO</label>
-                <select id="search-type" name="option-tipo" class="form-select fw-bold" aria-label="Default select example">
-                    <option value="comics">COMICS</option>
-                    <option value="characters">PERSONAJES</option>
-                </select>
-            </div>
-            <div class="p-2 bd-highlight">
-                <label for="control-order-by" class="form-label fw-bold text-secondary">ORDEN</label>
-                <select name="control-order-by" id="control-order-by" class="form-select fw-bold comics-select"
-                    aria-label="Default select example">
-                </select>
-            </div>
-            <!-- <select name="control-order-by" id="control-order-by" class="form-select"> -->
+                <div class="text-busqueda fw-bold"> <i></i> BÚSQUEDA</div>
+                <input type="password" name="contrasenia" id="input-busqueda" required>
+                <label class="label-busqueda">
+                    <span class="placeholder-busqueda text-secondary"> Ingresá tu búsqueda </span>
+                </label>
+
+                <div class="p-2 bd-highlight">
+                    <label for="option-tipo" class="form-label fw-bold text-secondary">TIPO</label>
+                    <select id="search-type" name="option-tipo" class="form-select fw-bold"
+                        aria-label="Default select example">
+                        <option value="comics">COMICS</option>
+                        <option value="characters">PERSONAJES</option>
+                    </select>
+                </div>
+                <div class="p-2 bd-highlight">
+                    <label for="control-order-by" class="form-label fw-bold text-secondary">ORDEN</label>
+                    <select name="control-order-by" id="control-order-by" class="form-select fw-bold comics-select"
+                        aria-label="Default select example">
+                    </select>
+                </div>
+                <!-- <select name="control-order-by" id="control-order-by" class="form-select"> -->
                 <!-- <option value="title">A - Z</option>
                 <option value="-title">Z - A</option>
                 <option value="-focDate">Más nuevos</option>
                 <option value="focDate">Más antiguos</option> -->
-            <!-- </select> -->
+                <!-- </select> -->
 
-            <button type="button" class="btn btn-primary">Enviar</button>
-        </form>
-    </section>
-
-
-
-
+                <button type="button" class="btn btn-primary">Enviar</button>
+            </form>
+        </section>
 
         <form id="search-comics" action=""></form>
         <section id="results"></section>
@@ -81,33 +78,68 @@
 
     </main>
 
-    <footer>
-        <div class="container-fluid p-0">
-            <footer class=" navbar container-footer">
-                <div class="text-white d-flex align-self-center">
-                    <a class="nav-link p-1" href="https://github.com/YaninaMedici" target="_blank">Yanina Medici
-                        <i class="fa-brands fa-github i-style"> </i>
-                    </a>
-                    <a class="nav-link p-1" href="https://github.com/Belu-Sanchez" target="_blank">Belu Sanchez
-                        <i class="fa-brands fa-github i-style"></i>
-                    </a>
-                </div>
-            </footer>
+
+    <!-- Paginador -->
+    <div>
+        <div>
+            <div class="d-flex justify-content-center">
+                <p>Página actual: <span id="actual-page"></span></p>
+            </div>
+            <div class="d-flex justify-content-center">
+                <p>Total de páginas: <span id="total-pages"></span></p>
+            </div>
         </div>
-    </footer>
+        <div aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item"><a class="page-link p-3" href="#" id="first-page">
+                        <i class="fa-solid fa-angles-left"></i>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link p-3" href="#" id="previus-page">
+                        <i class="fa-solid fa-angle-left"></i>
+                    </a>
+                </li>
+                <li class="page-item"><a class="page-link p-3" href="#" id="next-page">
+                        <i class="fa-solid fa-angle-right"></i></a>
+                </li>
+                <li class="page-item"><a class="page-link p-3" href="#" id="last-page">
+                        <i class="fa-solid fa-angles-right"></i></a>
+                </li>
+            </ul>
+        </div>
 
-    <!-- bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
-        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
-        crossorigin="anonymous"></script>
 
-    <script src="../api/characters.js"></script>
 
-    <script src="../api/comics.js"></script>
-    <script src="../js/main.js"></script>
+
+
+
+        <footer>
+            <div class="container-fluid p-0">
+                <footer class=" navbar container-footer">
+                    <div class="text-white d-flex align-self-center">
+                        <a class="nav-link p-1" href="https://github.com/YaninaMedici" target="_blank">Yanina Medici
+                            <i class="fa-brands fa-github i-style"> </i>
+                        </a>
+                        <a class="nav-link p-1" href="https://github.com/Belu-Sanchez" target="_blank">Belu Sanchez
+                            <i class="fa-brands fa-github i-style"></i>
+                        </a>
+                    </div>
+                </footer>
+            </div>
+        </footer>
+
+        <!-- bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+            integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+            integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+            crossorigin="anonymous"></script>
+
+        <script src="../api/characters.js"></script>
+
+        <script src="../api/comics.js"></script>
+        <script src="../js/main.js"></script>
 
 </body>
 
