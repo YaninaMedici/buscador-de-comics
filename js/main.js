@@ -18,7 +18,7 @@ comics
 
 
 
-//Belu
+//Belu personajes
 
 const loadCharacters = async () => {
     const charactersResponse = await getCharacters()
@@ -33,6 +33,10 @@ const loadCharacters = async () => {
     container.appendChild(row);
 
     container.classList.add('container');
+    // ***********************
+    // OCULTE EL CONTAINER PARA QUE NO MOLESTE, SI SACA LA CLASE SE VEN LOS PERSONAJES. 
+    container.classList.add('visually-hidden');
+
     row.classList.add('row');
 
     for (const character of characters) {
@@ -62,3 +66,32 @@ const loadCharacters = async () => {
 }
 
 loadCharacters()
+
+
+//**********************************************/
+// Form filtros
+//**********************************************/
+const controlorderBy = document.getElementById('control-order-by');
+const searchType = document.getElementById('search-type');
+
+
+const generarOption = ()=> {
+    if(searchType.value === 'comics'){
+        controlorderBy.innerHTML = `
+      <option value="title">A-Z</option>
+      <option value="-title">Z-A</option>
+      <option value="-onsaleDate">Más nuevos</option>
+      <option value="onsaleDate">Más viejos</option> `
+    }
+    if(searchType.value === 'characters'){
+        controlorderBy.innerHTML = `
+      <option value="name">A-Z</option>
+      <option value="-name">Z-A</option> `
+    }
+  }
+
+  generarOption()
+
+  searchType.addEventListener('change', () => {
+    generarOption()
+  })
