@@ -1,15 +1,22 @@
 // siempre los parametros tienen que ir en la url
 
 
-const comics = getComics();
+const loadComics = async () => {
+    const comicsResponse = await getComics();
+    const data = comicsResponse.data;
+    const comics = data.results;
 
-comics
-    .then(response => response.json())
-    .then(data => console.log(data))
+    console.log(data)
 
-// const loadComics = async () => {
-//     const comics = await getComics();
-//     console.log(comics);
-// }
+    comics.forEach(comic => {
+        console.log(comic)
+        
+    });
+}
 
-// loadComics();
+loadComics();
+
+
+// comics
+//     .then(response => response.json())
+//     .then(data => console.log(data))
