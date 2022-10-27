@@ -43,15 +43,15 @@
 
                 <div class="text-busqueda fw-bold"> <i></i> BÚSQUEDA</div>
 
-                <input type="password" name="contrasenia" id="input-busqueda">
+                <input type="text" name="search-input" id="search-input">
 
-                <label class="label-busqueda">
+                <label for="search-input" class="label-busqueda">
                     <span class="placeholder-busqueda text-secondary"> Ingresá tu búsqueda </span>
                 </label>
 
                 <div class="p-2 bd-highlight">
-                    <label for="option-tipo" class="form-label fw-bold text-secondary">TIPO</label>
-                    <select id="search-type" name="option-tipo" class="form-select fw-bold"
+                    <label for="search-type" class="form-label fw-bold text-secondary">TIPO</label>
+                    <select id="search-type" name="search-type" class="form-select fw-bold"
                         aria-label="Default select example">
                         <option value="comics">COMICS</option>
                         <option value="characters">PERSONAJES</option>
@@ -65,9 +65,14 @@
                 </div>
 
 
-                <button class="btn btn-primary">Enviar</button>
+                <button type="submit" class="btn btn-primary">Enviar</button>
+
             </form>
         </section>
+
+        <div id="results-number"></div>
+
+
 
         <section id="results"></section>
 
@@ -80,9 +85,11 @@
     <!-- Paginador -->
     <div>
         <div>
-            <div class="d-flex justify-content-center">
+            <div id="actual-page"></div>
+            <!-- <div class="d-flex justify-content-center">
                 <p>Página actual: <span id="actual-page"></span></p>
-            </div>
+            </div> -->
+            <!-- <div id="total-pages"></div> -->
             <div class="d-flex justify-content-center">
                 <p>Total de páginas: <span id="total-pages"></span></p>
             </div>
