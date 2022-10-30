@@ -58,9 +58,8 @@
     border: transparent;
 }
 
-.col {
-    margin: auto;
-    margin-top: 5%;
+.card-body {
+    margin-bottom: 30%;
 }
 
 .card-img-top {
