@@ -141,7 +141,7 @@ const generarOption = ()=> {
       <option value="name">A-Z</option>
       <option value="-name">Z-A</option> `
     }
-}
+};
 
 generarOption()
 
