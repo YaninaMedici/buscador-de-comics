@@ -100,7 +100,7 @@ const loadCharacters = async () => {
         cardImg.setAttribute('src', `${comic.thumbnail.path}.${comic.thumbnail.extension}`); // le pasamos los 2 parametros de la img
         
 
-    });
+    };
 }
 
 loadComics();
@@ -110,13 +110,13 @@ loadComics();
 //     .then(response => response.json())
 //     .then(data => console.log(data))
 
-        col.classList.add('col-md-3')
-        name.classList.add('h5')
+        // col.classList.add('col-md-3')
+        // name.classList.add('h5')
 
-        row.appendChild(col)
-        cardImg.setAttribute('src', `${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}` )
-    }
-}
+        // row.appendChild(col)
+        // cardImg.setAttribute('src', `${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}` )
+
+
 
 loadCharacters()
 
@@ -141,11 +141,10 @@ const generarOption = ()=> {
       <option value="name">A-Z</option>
       <option value="-name">Z-A</option> `
     }
-  }
+};
 
-  generarOption()
+generarOption()
 
-  searchType.addEventListener('change', () => {
+searchType.addEventListener('change', () => {
     generarOption()
-  })
-
+};
