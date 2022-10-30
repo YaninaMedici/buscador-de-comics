@@ -38,12 +38,13 @@ const loadComics = async () => {
         col.appendChild(card);
         cardBody.appendChild(title);
         title.appendChild(titleText);
-
+        
+        // pasamos los estilos de boostrap
         card.classList.add('card');
         cardImg.classList.add('card-img-top');
         cardBody.classList.add('card-body');
-        col.classList.add('col-md-3');
-        title.classList.add('h6'); // va a tener una importancia de un h2, pero boostrap permite que se vea como un h5
+        col.classList.add('col-md-2');
+        title.classList.add('h6'); // va a tener una importancia de un h2, pero boostrap permite que se vea como un h6
 
         row.appendChild(col); 
 

@@ -47,3 +47,32 @@
     color: rgb(255, 0, 0);
     font-size: 1em;
 }
+
+/* CARDS COMICS */
+
+.container {
+    margin-top: 5%;
+}
+
+.card {
+    border: transparent;
+}
+
+.col {
+    margin: auto;
+    margin-top: 5%;
+}
+
+.card-img-top {
+    box-shadow: 0 26px 24px -16px rgb(0 0 0 / 40%);
+}
+
+.card:focus,
+.card:hover {
+    color: rgb(255, 0, 0);
+    outline: 0;
+}
+
+.card-img-top:hover {
+    transform: translateY(-10px);
+}
