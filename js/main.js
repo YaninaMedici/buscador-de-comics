@@ -33,7 +33,7 @@ const loadComics = async () => {
   const params = getParams()
 
     const comicsResponse = await getComics(
-      params.get('offset') || 0, 
+      params.get('offset') || (page - 1) * 20, 
       params.get('orderBy') || 'title',
       params.get('orderType') || 'comics');
 
@@ -99,7 +99,7 @@ const loadCharacters = async () => {
 
   const params = getParams()
   const charactersResponse = await getCharacters(
-    params.get('offset') || 0, 
+    params.get('offset') || (page - 1) * 20, 
     params.get('orderBy') || 'name',
     params.get('orderType') || 'characters');
 
