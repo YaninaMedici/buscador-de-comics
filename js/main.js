@@ -85,8 +85,9 @@ const loadComics = async () => {
 
         cardImg.setAttribute('src', `${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`); // le pasamos los 2 parametros de la img
         
-
+  
     });
+
 }
 
 
@@ -105,7 +106,6 @@ const loadCharacters = async () => {
 
   const data = charactersResponse.data
   const characters = data.results
-
   const charactersResults = document.getElementById('characters-results');
   const container = document.createElement('div');
   const row = document.createElement('div')
@@ -127,14 +127,12 @@ const loadCharacters = async () => {
     const col = document.createElement('div');
     const name = document.createElement('h2');
     const nameText = document.createTextNode(character.name);
+    const comics = character.comics;
 
     card.addEventListener('click', () => {
       loadDetailCharacter(character)
-     // loadCharacterComics(character)
       container.classList.add('d-none');
-
-      // params.set('characterId', character.id);
-      // window.location.href = window.location.pathname + 'detail.html?' + params.toString();
+      
     })
 
     card.appendChild(cardImg);
@@ -191,66 +189,6 @@ const loadDetailCharacter = (character) => {
 
 }
 
-
-// const loadCharacterComics = (character) => {
-//   const characterComics = character
-//   const dataCharacterComics = characterComics.comics
-//   console.log(dataCharacterComics)
-//   const charactersDetailComics = document.getElementById('characters-detail-comics');
-//   charactersDetailComics.classList.remove('d-none')
-
-  
-//   const divText = document.createElement('div');
-//   const comics = document.createElement('h3');
-//   const pText = document.createElement('p');
-
-//   const textComics =  document.createTextNode(`Comics`);
-//   const textDescription =  document.createTextNode(`${dataCharacterComics.available} RESULTADOS`);
-
-//   charactersDetailComics.appendChild(divText);
-//   divText.appendChild(comics);
-//   divText.appendChild(pText);
-
-//   comics.appendChild(textComics);
-//   pText.appendChild(textDescription);
-
-
-//   const container = document.createElement('div');
-//   const row = document.createElement('div')
-
-//   charactersDetailComics.appendChild(container);
-//   container.appendChild(row);
-
-//   container.classList.add('container');
-
-//   row.classList.add('row');
-  
-//   const comicsItems = dataCharacterComics.items 
-
-//   for (const comicsItem of comicsItems) {
-//     const card = document.createElement('div');
-//     const cardImg = document.createElement('img');
-//     const cardBody = document.createElement('div');
-//     const col = document.createElement('div');
-//     const name = document.createElement('h2');
-//     const nameText = document.createTextNode(comicsItem.name);
-
-//     card.appendChild(cardImg);
-//     card.appendChild(cardBody);
-//     col.appendChild(card)
-//     cardBody.appendChild(name);
-//     name.appendChild(nameText)
-
-//     card.classList.add('card');
-//     cardImg.classList.add('card-img-top');
-//     cardBody.classList.add('card-body');
-//     col.classList.add('col-md-3')
-//     name.classList.add('h6')
-
-//     row.appendChild(col)
-//     //cardImg.setAttribute('href', `${comicsItem.resourceURI}` )
-//   }
-// }
 
 
 // //**********************************************/
