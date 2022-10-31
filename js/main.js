@@ -5,17 +5,22 @@
 
 // siempre los parametros tienen que ir en la url
 
+let page = 1;
 
 const loadComics = async () => {
-    const comicsResponse = await getComics();
+    
+    // const params = new URLSearchParams(window.location.search);
+
+    const comicsResponse = await getComics((page - 1) * 20, "title");  // para avanzar de a 20 comics // cuando page es 1, -1 va a ser 0, 0 * 20 es 0
     const data = comicsResponse.data;
     const comics = data.results;
 
-    console.log(data)
+    // console.log(data)
 
     // llamamos al section donde vamos a pintar las cards de los comics
     // y creamos el div y row que las va a contener
     const results = document.getElementById('comics-results');
+    results.innerHTML = ""; // es para vaciar el elemento cada vez que lo capturamos con el id
     const container = document.createElement('div');
     const row = document.createElement('div');
 
@@ -26,7 +31,7 @@ const loadComics = async () => {
     row.classList.add('row');
 
     comics.forEach(comic => {
-        console.log(comic)     
+        // console.log(comic)     
         
         // reemplazamos de esta manera el TEMPLATE creando los div, la Img, y agregandole las class de boostrap
         const card = document.createElement('div');
@@ -132,3 +137,97 @@ generarOption()
 // searchType.addEventListener('change', () => {
 //     generarOption()
 // };
+
+
+//**********************************************/
+// PAGINADOR
+//**********************************************/
+
+/* <li class="page-item"><a class="page-link text-bg-dark text-white p-3" href="#" id="first-page"><<</a></li>
+<li class="page-item"><a class="page-link text-bg-dark text-white p-3" href="#" id="previus-page"><</a></li>
+<li class="page-item"><a class="page-link text-bg-dark text-white p-3" href="#" id="next-page">></a></li>
+<li class="page-item"><a class="page-link text-bg-dark text-white p-3" href="#" id="last-page">>></a></li> */
+
+// const searchComics = () => {
+//     fetch(`endpoint?offset=${(page - 1) * 20}`) // para avanzar de a 20 comics // cuando page es 1, -1 va a ser 0, 0 * 20 es 0
+//     console.loge(page)
+// }
+
+
+const buttons = [
+    { 
+        text: "<<", 
+        class: "btn",
+        onClick: () => {
+            page = 1;
+            loadComics();
+        },
+    },
+    { 
+        text: "<",
+        class: "btn",
+        onClick: () => {
+            page = page - 1;
+            loadComics();        
+        },
+    },
+    {
+        text: "Página actual",
+        class: "btn",
+    },
+    { 
+        text: ">",
+        class: "btn",
+        onClick: () => {
+            page = page + 1;
+            loadComics();        
+        }
+    },
+    { 
+        text: ">>",
+        class: "btn",
+        onClick: () => {
+            page = 400; // DETERMINAR AUTOMATICAMENTE LA ULTIMA PAGINA!!!!!!!!
+            loadComics();        
+        }
+    },
+];
+
+// const containerPagination = document.getElementById('container-pagination');
+const pagination = document.createElement('div');
+// containerPagination.appendChild(pagination);
+pagination.setAttribute('id', 'pagination');
+pagination.classList.add('pagination');
+
+// const renderButton = () => {
+
+    buttons.forEach(button => {
+        
+        const buttonNode = document.createElement('button');
+        const textNode = document.createTextNode(button.text);
+        
+        buttonNode.appendChild(textNode);
+        buttonNode.classList.add(button.class);
+    
+        buttonNode.addEventListener('click', button.onClick)
+    
+        pagination.appendChild(buttonNode)
+    
+        // estilos de btn boostrap
+        // btn.classList.add('page-link text-bg-dark text-white')
+    });
+// }
+
+
+
+// const refresh = () => {
+
+    // const pageNode = document.createElement('h1');
+    // const pageNodeText = document.createTextNode(page);
+    
+    // pageNode.appendChild(pageNodeText);
+    
+    // document.body.appendChild(pageNode);
+    document.body.appendChild(pagination);
+
+// }
