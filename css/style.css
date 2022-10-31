@@ -144,6 +144,16 @@
   transform: translateY(-10px);
 }
 
+#characters-detail-comics {
+  display: flex;
+}
+#characters-detail-comics .detail {
+  margin: 2em;
+}
+#characters-detail-comics .detail-text {
+  margin: 2em;
+}
+
 .container-footer {
   background-color: rgb(0, 0, 0);
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;

@@ -116,8 +116,8 @@ const loadCharacters = async () => {
 
     card.addEventListener('click', () => {
       loadDetailCharacter(character)
-      loadCharacterComics(character)
-      charactersResults.classList.add('d-none');
+     // loadCharacterComics(character)
+      container.classList.add('d-none');
 
       // params.set('characterId', character.id);
       // window.location.href = window.location.pathname + 'detail.html?' + params.toString();
@@ -143,38 +143,39 @@ const loadCharacters = async () => {
 
 
 
-// const loadDetailCharacter = (character) => {
+const loadDetailCharacter = (character) => {
 
-//   //const charactersResponseDetail = await loadCharacters();
+  const charactersDetail = document.getElementById('characters-detail-comics');
+  charactersDetail.classList.remove('d-none')
+
+  const divImg = document.createElement('div');
+  const cardImg = document.createElement('img');
+  const divText = document.createElement('div');
+  const name = document.createElement('h3');
+  const pText = document.createElement('p');
+
+  const textName =  document.createTextNode(character.name);
+  const textDescription =  document.createTextNode(
+    character.description.length 
+    ? `Descripción: ${character.description}`
+    : "No hay descripción");
+  
+  charactersDetail.appendChild(divImg);
+  divImg.appendChild(cardImg)
+  charactersDetail.appendChild(divText);
+  divText.appendChild(name);
+  divText.appendChild(pText);
+
+  name.appendChild(textName);
+  pText.appendChild(textDescription);
+
+  cardImg.setAttribute('src', `${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}` )
+
+  divImg.classList.add('detail');
+  divText.classList.add('detail-text');
 
 
-//   const charactersDetail = document.getElementById('characters-detail');
-//   charactersDetail.classList.remove('d-none')
-
-//   const divImg = document.createElement('div');
-//   const cardImg = document.createElement('img');
-//   const divText = document.createElement('div');
-//   const name = document.createElement('h3');
-//   const pText = document.createElement('p');
-
-//   const textName =  document.createTextNode(character.name);
-//   const textDescription =  document.createTextNode(`Descripción: ${character.description}`);
-
-//   //div.appendChild(document.createTextNode)
-
-//   charactersDetail.appendChild(divImg);
-//   divImg.appendChild(cardImg)
-//   charactersDetail.appendChild(divText);
-//   divText.appendChild(name);
-//   divText.appendChild(pText);
-
-//   name.appendChild(textName);
-//   pText.appendChild(textDescription);
-
-//   cardImg.setAttribute('src', `${character.thumbnail.path}/portrait_uncanny.${character.thumbnail.extension}` )
-
-
-// }
+}
 
 
 // const loadCharacterComics = (character) => {
