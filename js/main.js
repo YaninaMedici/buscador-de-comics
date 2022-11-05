@@ -6,10 +6,10 @@ const controlOrderBy = document.getElementById('control-order-by');
 const searchComics = document.getElementById('search-comics');
 
 
-const getParams = () => {
-  const params = new URLSearchParams(window.location.search);
-  return params
-}
+// const getParams = () => {
+//   const params = new URLSearchParams(window.location.search);
+//   return params
+// }
   
 
 //**********************************************/
@@ -17,8 +17,7 @@ const getParams = () => {
 //**********************************************/
 // siempre los parametros tienen que ir en la url
 
-let page = 1;
-
+// =======
 // const loadComics = async () => {
     
     // const params = new URLSearchParams(window.location.search);
@@ -29,18 +28,30 @@ let page = 1;
 
     // console.log(data)
 // =======
+
 const loadComics = async () => {
-  const params = getParams()
 
-    const comicsResponse = await getComics(
-      params.get('offset') || (page - 1) * 20, 
-      params.get('orderBy') || 'title',
-      params.get('orderType') || 'comics');
+  const params = new URLSearchParams(window.location.search);
+  const page = parseInt(params.get('p')) || 1;
 
-      //searchType
-    const data = comicsResponse.data;
-    const comics = data.results;
-    console.log(comics)
+  const comicsResponse = await getComics(page, "title");
+  
+  const data = comicsResponse.data;
+  const comics = data.results;
+
+
+
+  // const params = getParams()
+
+  //   const comicsResponse = await getComics( 
+  //     params.get('offset') || (page - 1) * 20, 
+  //     params.get('orderBy') || 'title',
+  //     params.get('orderType') || 'comics');
+
+  //     //searchType
+  //   const data = comicsResponse.data;
+  //   const comics = data.results;
+  //   console.log(comics)
 
 
     // llamamos al section donde vamos a pintar las cards de los comics
@@ -49,6 +60,7 @@ const loadComics = async () => {
     results.innerHTML = ""; // es para vaciar el elemento cada vez que lo capturamos con el id
     const container = document.createElement('div');
     const row = document.createElement('div');
+
     results.appendChild(container);
     container.appendChild(row);
 
@@ -64,8 +76,18 @@ const loadComics = async () => {
         const col = document.createElement('div');
         const title = document.createElement('h2');
 
-        const titleText = document.createTextNode(comic.title);
+        // card.addEventListener('click', () => {
+        //   params.set('comicId', comic.id);
+        //   window.location.href = window.location.pathname = '/../detail.html?' = params.toString();
 
+        // })
+
+        // backButton.addEventListener('click', () => {
+        //   results.classList.remove('d-none');
+        //   backButton.classList.remove('d-none');
+        // })
+
+        const titleText = document.createTextNode(comic.title);
 
         // indicamos que va dentro de cada cosa
         card.appendChild(cardImg);
@@ -78,20 +100,17 @@ const loadComics = async () => {
         card.classList.add('card');
         cardImg.classList.add('card-img-top');
         cardBody.classList.add('card-body');
-        col.classList.add('col-md-2');
+        col.classList.add('col-md-2'); // col-6
         title.classList.add('h6'); // va a tener una importancia de un h2, pero boostrap permite que se vea como un h6
 
         row.appendChild(col); 
 
-        cardImg.setAttribute('src', `${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`); // le pasamos los 2 parametros de la img
-        
-  
+        cardImg.setAttribute('src', `${comic.thumbnail.path}.${comic.thumbnail.extension}`); // le pasamos los 2 parametros de la img
+        // cardImg.setAttribute('src', `${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}`); // le pasamos los 2 parametros de la img
     });
 
+    renderPagination(Math.ceil(data.total / 20)); // le estamos pasando el objeto que creamos arriba con dom
 }
-
-
-
 
 //**********************************************/
 // PERSONAJES
@@ -152,9 +171,6 @@ const loadCharacters = async () => {
   }
 }
 
-
-
-
 const loadDetailCharacter = (character) => {
 
   const charactersDetail = document.getElementById('characters-detail-comics');
@@ -185,11 +201,7 @@ const loadDetailCharacter = (character) => {
 
   divImg.classList.add('detail');
   divText.classList.add('detail-text');
-
-
 }
-
-
 
 // //**********************************************/
 // Formularios
@@ -231,28 +243,9 @@ const generarOption = ()=> {
   }
 };
 
-
 searchType.addEventListener('change', () => {
   generarOption()
 });
-
-
-const init = () => {
-  generarOption()
-  const params = new URLSearchParams(window.location.search);
-  if (params.get('orderType') ===  'characters') {
-      loadCharacters();
-
-  } else {
-      loadComics();
-
-  }
-};
-
-window.onload = init();
-
-
-
 
 // searchType.addEventListener('change', () => {
 //     generarOption()
@@ -263,92 +256,81 @@ window.onload = init();
 // PAGINADOR
 //**********************************************/
 
-/* <li class="page-item"><a class="page-link text-bg-dark text-white p-3" href="#" id="first-page"><<</a></li>
-<li class="page-item"><a class="page-link text-bg-dark text-white p-3" href="#" id="previus-page"><</a></li>
-<li class="page-item"><a class="page-link text-bg-dark text-white p-3" href="#" id="next-page">></a></li>
-<li class="page-item"><a class="page-link text-bg-dark text-white p-3" href="#" id="last-page">>></a></li> */
+const renderPagination = (totalPages) => {
 
-// const searchComics = () => {
-//     fetch(`endpoint?offset=${(page - 1) * 20}`) // para avanzar de a 20 comics // cuando page es 1, -1 va a ser 0, 0 * 20 es 0
-//     console.loge(page)
-// }
+  console.log(totalPages)
 
+  const params = new URLSearchParams(window.location.search);
+  const page = parseInt(params.get('p')) || 1;
 
-const buttons = [
-    { 
-        text: "<<", 
-        class: "btn",
-        onClick: () => {
-            page = 1;
-            loadComics();
-        },
+  const buttons = [{ 
+    text: "<<", 
+    class: "btn",
+    onClick: function() {    
+      params.set('p', 1);
+      window.location.href = window.location.pathname + '?' + params.toString()
     },
-    { 
-        text: "<",
-        class: "btn",
-        onClick: () => {
-            page = page - 1;
-            loadComics();        
-        },
+  },{ 
+    text: page - 1, // "<"
+    class: "btn",
+    onClick: function() {      
+      params.set('p', page - 1)
+      window.location.href = window.location.pathname + '?' + params.toString()
     },
-    {
-        text: "Página actual",
-        class: "btn",
-    },
-    { 
-        text: ">",
-        class: "btn",
-        onClick: () => {
-            page = page + 1;
-            loadComics();        
-        }
-    },
-    { 
-        text: ">>",
-        class: "btn",
-        onClick: () => {
-            page = 400; // DETERMINAR AUTOMATICAMENTE LA ULTIMA PAGINA!!!!!!!!
-            loadComics();        
-        }
-    },
-];
+  },{
+    text: page, // "Página actual"
+    class: "btn",
+  },{ 
+    text: page + 1, // ">"
+    class: "btn",
+    onClick: function() {   
+      params.set('p', page + 1)
+      window.location.href = window.location.pathname + '?' + params.toString()
+    }
+  },{ 
+    text: ">>",
+    class: "btn",
+    onClick: function() {
+      params.set('p', totalPages)
+      window.location.href = window.location.pathname + '?' + params.toString()
+    }
+  }];
 
-// const containerPagination = document.getElementById('container-pagination');
-const pagination = document.createElement('div');
-// containerPagination.appendChild(pagination);
-pagination.setAttribute('id', 'pagination');
-pagination.classList.add('pagination');
+  // const containerPagination = document.getElementById('container-pagination');
+  // containerPagination.appendChild(pagination);
+  const pagination = document.createElement('div');
+  pagination.setAttribute('id', 'pagination');
+  pagination.classList.add('pagination');
 
-// const renderButton = () => {
 
-    buttons.forEach(button => {
+  buttons.forEach(button => {
+           
+    const buttonNode = document.createElement('button');
+    const textNode = document.createTextNode(button.text);        
+    buttonNode.appendChild(textNode);
+    buttonNode.classList.add(button.class);
+    
+    buttonNode.addEventListener('click', button.onClick)
         
-        const buttonNode = document.createElement('button');
-        const textNode = document.createTextNode(button.text);
-        
-        buttonNode.appendChild(textNode);
-        buttonNode.classList.add(button.class);
+    pagination.appendChild(buttonNode)
     
-        buttonNode.addEventListener('click', button.onClick)
-    
-        pagination.appendChild(buttonNode)
-    
-        // estilos de btn boostrap
-        // btn.classList.add('page-link text-bg-dark text-white')
-    });
-// }
+    // estilos de btn boostrap // btn.classList.add('page-link text-bg-dark text-white')
+  });
+  document.body.appendChild(pagination);
+}
 
 
+const init = () => {
+  loadComics();
+    // generarOption()
+    // const params = new URLSearchParams(window.location.search);
+    // if (params.get('orderType') ===  'characters') {
+    //     loadCharacters();
+    //     } else {
+    //         loadComics(1);
+    //     }
+};
 
-// const refresh = () => {
-
-    // const pageNode = document.createElement('h1');
-    // const pageNodeText = document.createTextNode(page);
-    
-    // pageNode.appendChild(pageNodeText);
-    
-    // document.body.appendChild(pageNode);
-    document.body.appendChild(pagination);
-
-// }
+init();
+// window.onload = init();
 
