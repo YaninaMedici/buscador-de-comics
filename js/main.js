@@ -6,28 +6,16 @@ const controlOrderBy = document.getElementById('control-order-by');
 const searchComics = document.getElementById('search-comics');
 
 
-// const getParams = () => {
-//   const params = new URLSearchParams(window.location.search);
-//   return params
-// }
+const getParams = () => {
+  const params = new URLSearchParams(window.location.search);
+  return params
+}
   
 
 //**********************************************/
 // COMICS
 //**********************************************/
 // siempre los parametros tienen que ir en la url
-
-// =======
-// const loadComics = async () => {
-    
-    // const params = new URLSearchParams(window.location.search);
-
-    // const comicsResponse = await getComics((page - 1) * 20, "title");  // para avanzar de a 20 comics // cuando page es 1, -1 va a ser 0, 0 * 20 es 0
-    // const data = comicsResponse.data;
-    // const comics = data.results;
-
-    // console.log(data)
-// =======
 
 const loadComics = async () => {
 
@@ -38,8 +26,6 @@ const loadComics = async () => {
   
   const data = comicsResponse.data;
   const comics = data.results;
-
-
 
   // const params = getParams()
 
@@ -135,7 +121,7 @@ const loadCharacters = async () => {
   container.classList.add('container');
   // ***********************
   // OCULTE EL CONTAINER PARA QUE NO MOLESTE, SI SACA LA CLASE SE VEN LOS PERSONAJES. 
-   charactersResults.classList.remove('d-none');
+  charactersResults.classList.remove('d-none');
 
   row.classList.add('row');
 
@@ -247,18 +233,12 @@ searchType.addEventListener('change', () => {
   generarOption()
 });
 
-// searchType.addEventListener('change', () => {
-//     generarOption()
-// };
-
 
 //**********************************************/
 // PAGINADOR
 //**********************************************/
 
 const renderPagination = (totalPages) => {
-
-  console.log(totalPages)
 
   const params = new URLSearchParams(window.location.search);
   const page = parseInt(params.get('p')) || 1;
@@ -322,15 +302,19 @@ const renderPagination = (totalPages) => {
 
 const init = () => {
   loadComics();
-    // generarOption()
-    // const params = new URLSearchParams(window.location.search);
-    // if (params.get('orderType') ===  'characters') {
-    //     loadCharacters();
-    //     } else {
-    //         loadComics(1);
-    //     }
+
+  //COMENTADO
+  generarOption()
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('orderType') ===  'characters') {
+    loadCharacters();
+    } else {
+      loadComics(1);
+    }
 };
 
 init();
-// window.onload = init();
+
+//COMENTADO
+window.onload = init(); 
 
