@@ -1,3 +1,4 @@
+
 const results = document.getElementById('comics-results');
 const charactersResults = document.getElementById('characters-results');
 const searchType = document.getElementById('search-type');

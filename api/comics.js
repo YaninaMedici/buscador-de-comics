@@ -7,18 +7,7 @@ const getComics = async (page, orderBy) => {
     const offset = (page - 1) * 20; // para avanzar de a 20 comics // cuando page es 1, -1 va a ser 0, 0 * 20 es 0
 
     const response = await fetch(`${baseUrl}/comics?&apikey=${apikey}&offset=${offset}&orderBy=${orderBy}`)
+
     const data = await response.json()
     return data;
 }
-
-
-// let url 
-// if(searchType.value === 'comics'){
-//     if(searchInput == ""){
-//         url = `${baseUrl}/comics?&offset=${offset}&orderBy=${orderBy}&apikey=${apikey}`
-
-// }
-//     }else{
-//     url = `${baseUrl}/comics?&titleStartsWith=${searchInput}&offset=${offset}&orderBy=${orderBy}&apikey=${apikey}`
-
-// }
